@@ -1,10 +1,10 @@
 
 import mongoose from "mongoose";
 
-const { Schema } = mongoose;
+
 
 // define new schema//
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
   username: {
     type: String,
     // Field must be provided//
@@ -35,8 +35,6 @@ const userSchema = new Schema({
     max: 120                                 
   },
 
-  isVerfied: Boolean,
-
   role: {
     type: String,
     enum: {
@@ -55,6 +53,14 @@ const userSchema = new Schema({
     default: () => Date.now(),    
     // if set to true--it cannot be changed after creation//          
     immutable: true                         
-  }
+  },
+
+    isVerfied: {
+      type: Boolean,
+      default: false
+    },
 
 });
+
+// this will create the user model for the users' collection//
+export default mongoose.model("User", userSchema);

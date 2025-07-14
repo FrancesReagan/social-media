@@ -1,7 +1,8 @@
 import express from "express";
 // import { MongoClient } from "mongodb";
-import mongoose from "mongoose";
 import dotenv from "dotenv";
+import mongoose from "mongoose";
+import User from "./models/User.js";
 
 dotenv.config();
 
@@ -9,34 +10,54 @@ const app = express();
 const PORT = 3000;
 const uri = process.env.MONGODB_URL;
 
-// connect to MongoDb using Mongoose//
-mongoose.connect(uri)
-.then(() => console.log("Connected successfully to MongoDb"))
-.catch(e => console.log(`Error connecting to MongoDb: ${e}`));
+// ====== middleware =======
+app.use(express.json());
 
-// const uri = process.env.MONGODB_URL;
-// const client = new MongoClient(uri);
+// Connect to MongoDB using Mongoose
+mongoose
+  .connect(uri)
+  .then(console.log("Connected successfully to MongoDB!"))
+  .catch((e) => console.log(`Error connecting to MongoDB: ${e}`));
 
-// // this will be put in separate file later on--all up to the run() function//
-// async function run() {
-//   try {
-//     // Connect the client to the server
-//     await client.connect();
-//     // Establish and verify connection---select database I am trying to connect to------if you write a name of a database that does not yet exist --
-//     // it will automatically create a new database with that name---the command ping is to check database is connected--get a response//
-//     await client.db("admin").command({ ping: 1 });
-//     console.log("Connected successfully to MongoDB!");
-//   } finally {
-//     // Ensures that the client will close when you finish/error
-//     await client.close();
-//   }
-// }
-// // calling function below//
-// run().catch(console.dir);
+// ======= Routes ===========
+app.get("/", async (req, res) => {
+  res.status(200).json({ message: "Successfully connected to the database!" });
+});
 
+// create a new user
+app.post("/users", async (req, res) => {
+  try {
+    const newUser = new User(req.body);
+    await newUser.save();
+    res.status(201).json(newUser);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: e.message });
+  }
+});
 
-app.get("/", (req, res) => {
-  res.send("Hello, from API!");
-})
+// get all users
+app.get("/users", async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    console.error(error);
+  }
+});
 
-app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
+// get an user by the id
+app.get("/users/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const user = await User.findById(id);
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    console.error(error);
+  }
+});
+
+app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
