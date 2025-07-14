@@ -24,13 +24,30 @@ The purpose  of the dotenv is that its a package that loads environment variable
 different settings for development, testing, and production; and as importantly, it keeps sensitive or secret information out of version control (github repos).
 
 Other methods to manage environment variables are:
+
 _Cloud Solutions_
+
 -`AWS systems manager parameter store`: encrypted parameter storage with refined access control
+
 -`Azure key vault`: secure secrets management with audit logging.
+
 -`Google Cloud Secret Manager`: encrypted secret storage with version(ing).
 
+
 _Container Solutions_
+
 -Docker Secrets: encrypted secret distribution in `Docker Swarm`.
+
+
+Database Connection Debugging steps are as follows: check the error messages...read the exact error message--it will often point to the specific issue I am having and show
+                      where it is to be found.; verify network connectivity--use ping to test if the database server is reachable; confirm service status---ensure the 
+                      database is running on the right or target server; validate credentials---double check username, password, and database name; verify connection string
+                      ---ensure that the host, post, and database name are correct.
+
+                      1. Start with the simplest explanations for the error--the credentials or network
+                      2. Use the process of elimination
+                      3.Test each component in isolation
+                      4. Document what I found for future debugging.
 
 
 
