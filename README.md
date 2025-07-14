@@ -16,6 +16,14 @@ IP address whitelisting in production is important as "whitelisting" creates a f
 Also, whitelisting reduces or limits potential entry points for hackers.  Whitelisting also is a standard compliance protocol --as many security standards and regulations
 require network-level access controls. It also enables montioring/tracking/auditing who has access to my database.
 
-The risks of allowing 0.0.0.0/0(anywhere) 
+The risks of allowing 0.0.0.0/0(anywhere) are that attackers can attempt to guess credentials from anywhere on the internet; data breaches could occur if the credentials are compromised--then hackers have unrestricted network access; it is harder to distinguish what is bad or malicious traffic and what is benign.
+
+Best practices: have whitelist specific IP ranges for my application servers, use VPN endpoints for admin access, and implement multiple security levels at network/authentication/authorization levels.
+
+The purpose  of the dotenv is that its a package that loads environment variables form an `.env` file into `process.env`; it separates configuratoni form code; it allows
+different settings for development, testing, and production; and as importantly, it keeps sensitive or secret information out of version control (github repos).
+
+
+
 
 
