@@ -25,9 +25,9 @@ different settings for development, testing, and production; and as importantly,
 
 Other methods to manage environment variables are:
 _Cloud Solutions_
--AWS systems manager parameter store: encrypted parameter storage with refined access control
--Azure key vault: secure secrets management with audit logging.
--Google Cloud Secret Manager: encrypted secret storage with version(ing).
+-`AWS systems manager parameter store`: encrypted parameter storage with refined access control
+-`Azure key vault`: secure secrets management with audit logging.
+-`Google Cloud Secret Manager`: encrypted secret storage with version(ing).
 
 _Container Solutions_
 -Docker Secrets: encrypted secret distribution in `Docker Swarm`.
