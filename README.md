@@ -23,6 +23,19 @@ Best practices: have whitelist specific IP ranges for my application servers, us
 The purpose  of the dotenv is that its a package that loads environment variables form an `.env` file into `process.env`; it separates configuratoni form code; it allows
 different settings for development, testing, and production; and as importantly, it keeps sensitive or secret information out of version control (github repos).
 
+Other methods to manage environment variables are:
+_Cloud Solutions_
+-AWS systems manager parameter store: encrypted parameter storage with refined access control
+-Azure key vault: secure secrets management with audit logging.
+-Google Cloud Secret Manager: encrypted secret storage with version(ing).
+
+_Container Solutions_
+-Docker Secrets: encrypted secret distribution in `Docker Swarm`.
+
+
+
+
+
 
 
 
